@@ -2,14 +2,14 @@ import { RevealOnScroll } from "../RevealOnScroll";
 
 export const About = () => {
   const frontendSkills = [
-    "React",
-    "Vue",
-    "TypeScript",
+    "HTML5",
+    "CSS3",
+    "React.js",
+    "Bootstrap",
     "TailwindCSS",
-    "Svelte",
   ];
 
-  const backendSkills = ["Node.js", "Python", "AWS", "MongoDB", "GraphQL"];
+  const backendSkills = ["SQL", "Python", "AWS", "MongoDB"];
 
   return (
     <section
@@ -69,12 +69,11 @@ export const About = () => {
               <h3 className="text-xl font-bold mb-4"> 🏫 Education </h3>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>
-                  <strong> B.S. in Computer Science </strong> - XYZ University
-                  (2016-2020)
+                  <strong> B.E. in Information Science </strong> - VTU University
+                  (2017-2021)
                 </li>
                 <li>
-                  Relevant Coursework: Data Structures, Web Development, Cloud
-                  Computing...
+                  Relevant Coursework: Data Structures, Operating Systems, Web Development, Data Communication, Machine Learning
                 </li>
               </ul>
             </div>
@@ -84,22 +83,19 @@ export const About = () => {
                 <div>
                   <h4 className="font-semibold">
                     {" "}
-                    Software Engineer at ABC Corp (2020 - Present){" "}
+                    Software Engineer at University of Wisconsin-Madison (2024 - Present){" "}
                   </h4>
                   <p>
-                    Developed and maintained microservices for cloud-based
-                    applications.
-                  </p>
+                  Built a web app for 100+ MA-LIS students, boosting engagement by 15% with JavaScript components and optimized Node.js APIs.                  </p>
                 </div>
 
                 <div>
                   <h4 className="font-semibold">
                     {" "}
-                    Intern at DEF Startups (2019){" "}
+                    Software Engineer at PwC (2021 - 2023){" "}
                   </h4>
                   <p>
-                    Assisted in building front-end components and integration
-                    REST APIs
+                  Optimized iOS apps using MVVM, Swift, and Objective-C, improving code efficiency by 10%. Enhanced a React.js app on AWS, reducing load times by 5% and boosting user sessions by 10%.
                   </p>
                 </div>
               </div>
