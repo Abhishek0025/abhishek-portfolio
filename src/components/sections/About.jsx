@@ -67,16 +67,21 @@ export const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
               <h3 className="text-xl font-bold mb-4"> 🏫 Education </h3>
-              <ul className="list-disc list-inside text-gray-300 space-y-2">
-                <li>
+              <div className="space-y-4 text-gray-300">
+                <div>
                   <strong> B.E. in Information Science </strong> - VTU University
                   (2017-2021)
-                </li>
-                <li>
-                  Relevant Coursework: Data Structures, Operating Systems, Web Development, Data Communication, Machine Learning
-                </li>
-              </ul>
+                  <p>Relevant Coursework: Data Structures, Operating Systems, Web Development, Data Communication, Machine Learning</p>
+                </div>
+             
+                <div>
+                  <strong> M.S in Information Science </strong> - University of Wisconsin-Madison
+                  (2023-2025)
+                  <p>Relevant Coursework: Data Management, Artificial Intelligence, Information Architecture, Data Visualisation, HCI</p>
+                </div>
+              </div>
             </div>
+            
             <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
               <h3 className="text-xl font-bold mb-4"> 💼 Work Experience </h3>
               <div className="space-y-4 text-gray-300">
