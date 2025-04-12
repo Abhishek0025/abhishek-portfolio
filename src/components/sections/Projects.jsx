@@ -48,13 +48,12 @@ export const Projects = () => {
               transition-all
             "
             >
-              <h3 className="text-xl font-bold mb-2">AI Analytics Dashboard</h3>
+              <h3 className="text-xl font-bold mb-2">Tic-Tac-Toe Game</h3>
               <p className="text-gray-400 mb-4">
-                ML-powered data visualization platform with predictive analytics
-                and interactive reports.
+              This project is a simple Tic-Tac-Toe game built with React and Vite. The game allows two players to play on a 3x3 grid, with one player using "X" and the other using "O". The game checks for a winner and highlights the winning line once three of the same symbols are aligned horizontally, vertically, or diagonally. Players can reset the game after a win or draw.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Python", "TensorFlow", "D3.js", "Flask"].map((tech, key) => (
+                {["HTML5", "Bootstrap", "react.js"].map((tech, key) => (
                   <span
                     key={key}
                     className="
@@ -71,7 +70,7 @@ export const Projects = () => {
               </div>
               <div className="flex justify-between items-center">
                 <a
-                  href="#"
+                  href="https://github.com/Abhishek0025/Tic-Tac-Toe"
                   className="text-blue-400 hover:text-blue-300 transition-colors my-4"
                 >
                   View Project →
