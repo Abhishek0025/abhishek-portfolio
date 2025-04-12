@@ -70,7 +70,7 @@ Error generating stack: `+a.message+`
               hover:-translate-y-1 hover:border-blue-500/30
               hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
               transition-all
-            `,children:[b.jsx("h3",{className:"text-xl font-bold mb-2",children:"Tic-Tac-Toe Game"}),b.jsx("p",{className:"text-gray-400 mb-4",children:'This project is a simple Tic-Tac-Toe game built with React and Vite. The game allows two players to play on a 3x3 grid, with one player using "X" and the other using "O". The game checks for a winner and highlights the winning line once three of the same symbols are aligned horizontally, vertically, or diagonally. Players can reset the game after a win or draw.'}),b.jsx("div",{className:"flex flex-wrap gap-2 mb-4",children:["HTML5","Bootstrap","react.js"].map((E,_)=>b.jsx("span",{className:`
+            `,children:[b.jsx("h3",{className:"text-xl font-bold mb-2",children:"Tic-Tac-Toe Game"}),b.jsx("p",{className:"text-gray-400 mb-4",children:'This is a simple Tic-Tac-Toe game built with React and Vite. Two players take turns on a 3x3 grid as "X" and "O". The game detects and highlights winning combinations and allows resetting after a win or draw.              '}),b.jsx("div",{className:"flex flex-wrap gap-2 mb-4",children:["HTML5","Bootstrap","react.js"].map((E,_)=>b.jsx("span",{className:`
                       bg-blue-500/10 text-blue-500 py-1 px-3 
                       rounded-full text-sm
                       transition
