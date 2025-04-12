@@ -50,8 +50,7 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">Tic-Tac-Toe Game</h3>
               <p className="text-gray-400 mb-4">
-              This project is a simple Tic-Tac-Toe game built with React and Vite. The game allows two players to play on a 3x3 grid, with one player using "X" and the other using "O". The game checks for a winner and highlights the winning line once three of the same symbols are aligned horizontally, vertically, or diagonally. Players can reset the game after a win or draw.
-              </p>
+              This is a simple Tic-Tac-Toe game built with React and Vite. Two players take turns on a 3x3 grid as "X" and "O". The game detects and highlights winning combinations and allows resetting after a win or draw.              </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["HTML5", "Bootstrap", "react.js"].map((tech, key) => (
                   <span
