@@ -69,15 +69,14 @@ export const About = () => {
               <h3 className="text-xl font-bold mb-4"> 🏫 Education </h3>
               <div className="space-y-4 text-gray-300">
                 <div>
-                  <strong> B.E. in Information Science </strong> - VTU University
-                  (2017-2021)
-                  <p>Relevant Coursework: Data Structures, Operating Systems, Web Development, Data Communication, Machine Learning</p>
-                </div>
-             
-                <div>
                   <strong> M.S in Information Science </strong> - University of Wisconsin-Madison
                   (2023-2025)
                   <p>Relevant Coursework: Data Management, Artificial Intelligence, Information Architecture, Data Visualisation, HCI</p>
+                </div>
+                <div>
+                  <strong> B.E. in Information Science </strong> - VTU University
+                  (2017-2021)
+                  <p>Relevant Coursework: Data Structures, Operating Systems, Web Development, Data Communication, Machine Learning</p>
                 </div>
               </div>
             </div>
