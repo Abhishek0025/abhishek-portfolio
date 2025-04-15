@@ -13,9 +13,9 @@ export const Home = () => {
           </h1>
 
           <p className="tex-gray-400 text-lg mb-8 max-w-lg mx-auto">
-          I'm a software developer passionate about building efficient, scalable 
-          web applications that deliver seamless user experiences. With a strong foundation in full-stack development, 
-          I focus on crafting clean, high-performance solutions that meet both technical and user needs.
+          I'm a software developer dedicated to delivering significant value through the creation of efficient and scalable web applications that guarantee seamless user experiences. 
+          My robust full-stack foundation empowers me to develop clean, high-performance solutions strategically aligned with both technical goals and user satisfaction, 
+          making me a strong fit for roles requiring a results-oriented developer focused on impactful and user-centric outcomes.
           </p>
           <div className="flex justify-center space-x-4">
             <a
