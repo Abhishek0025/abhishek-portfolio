@@ -1,7 +1,6 @@
 
-import { useState } from 'react'
+import { useState, createContext, useContext } from 'react'
 import './App.css'
-import { LoadingScreen } from './components/LoadingScreen'
 import { Navbar } from './components/Navbar'
 import { MobileMenu } from './components/MobileMenu'
 import { ProgressIndicator } from './components/ProgressIndicator'
@@ -12,14 +11,32 @@ import { Projects } from './components/sections/Projects'
 import { Contact } from './components/sections/Contact'
 import "./index.css"
 
+// Theme Context
+export const ThemeContext = createContext();
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};
+
 function App() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState('dark'); // 'dark' or 'light'
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   return (
-    <>
-      {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)}/>}{" "}
-      <div className={`min-h-screen transition-opactiy duation-700 ${isLoaded ? "opacity-100" : "opacity-0"} bg-black text-gray-100`} >
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className={`min-h-screen transition-all duration-500 ${
+        theme === 'dark' 
+          ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900 text-gray-100' 
+          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900'
+      }`}>
         <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
         <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
         <ProgressIndicator />
@@ -29,7 +46,7 @@ function App() {
         <Projects />
         <Contact />
       </div>        
-    </>
+    </ThemeContext.Provider>
   )
 }
 

@@ -1,45 +1,54 @@
 import { RevealOnScroll } from "../RevealOnScroll";
+import { useTheme } from "../../App";
 
 export const Projects = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   const projects = [
     {
       id: 1,
+      title: "Real-time Cloud Billing Dashboard",
+      description: "Cloud costs are often misunderstood and hard to track, especially for small teams. I built Cloud Cost Analyzer to learn how to integrate real AWS billing data with full-stack tools, build a scalable and intuitive frontend using React + Chart.js, practice secure AWS authentication with IAM and Cost Explorer API, and simulate the kind of product used at cloud cost optimization startups like Pump.co. Visualized AWS costs and usage in a clean, interactive dashboard, reducing cloud billing uncertainty by 80% using smart charts and real-time data.",
+      technologies: ["React.js", "Chart.js", "Python", "FastAPI", "AWS Cost Explorer API", "boto3", "IAM"],
+      githubUrl: "#",
+      liveUrl: null,
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Web 3 Project",
+      description: "A decentralized application built on blockchain technology with smart contracts and Web3 integration. Features include wallet connectivity, NFT functionality, and decentralized governance.",
+      technologies: ["Solidity", "Web3.js", "React", "Ethereum", "Hardhat"],
+      githubUrl: "#",
+      liveUrl: null,
+      featured: true
+    },
+    {
+      id: 3,
+      title: "Real-Time Chat Application",
+      description: "Scalable chat platform supporting real-time messaging, user presence, and group conversations. Features include message persistence and responsive design.",
+      technologies: ["Socket.IO", "Express.js", "React", "Redis"],
+      githubUrl: "#",
+      liveUrl: null,
+      featured: false
+    },
+    {
+      id: 4,
       title: "To-Do List App",
       description: "A clean and intuitive task management application built with SwiftUI, featuring smooth animations and persistent data storage. Users can efficiently organize tasks with a minimalist interface.",
       technologies: ["SwiftUI", "UserDefaults", "Xcode"],
       githubUrl: "https://github.com/Abhishek0025/To-Do-List",
       liveUrl: null,
-      image: "/project-todo.jpg",
-      featured: true
+      featured: false
     },
     {
-      id: 2,
+      id: 5,
       title: "Tic-Tac-Toe Game",
       description: "An interactive two-player game built with React and Vite. Features include win detection, game state management, and responsive design for seamless gameplay across devices.",
       technologies: ["React.js", "Vite", "HTML5", "CSS3"],
       githubUrl: "https://github.com/Abhishek0025/Tic-Tac-Toe",
-      liveUrl: "https://abhishek0025.github.io/Tic-Tac-Toe/",
-      image: "/project-tictactoe.jpg",
-      featured: true
-    },
-    {
-      id: 3,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with modern UI, secure payment integration, and comprehensive product management. Built with Next.js and TypeScript for optimal performance.",
-      technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-      githubUrl: "#",
-      liveUrl: "#",
-      image: "/project-ecommerce.jpg",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Real-Time Chat Application",
-      description: "Scalable chat platform supporting real-time messaging, user presence, and group conversations. Features include message persistence and responsive design.",
-      technologies: ["Socket.IO", "Express.js", "React", "Redis"],
-      githubUrl: "#",
-      liveUrl: "#",
-      image: "/project-chat.jpg",
+      liveUrl: null,
       featured: false
     }
   ];
@@ -59,23 +68,19 @@ export const Projects = () => {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className={`group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm hover:-translate-y-2 hover:border-blue-500/30 hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] transition-all duration-500 ${
+                className={`group relative overflow-hidden rounded-xl border backdrop-blur-sm hover:-translate-y-2 hover:border-blue-500/30 hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] transition-all duration-500 ${
                   project.featured ? 'lg:col-span-2' : ''
+                } ${
+                  isDark 
+                    ? 'border-white/10 bg-gradient-to-br from-white/5 to-white/10' 
+                    : 'border-gray-200 bg-gradient-to-br from-gray-50/50 to-white/50'
                 }`}
               >
-                {/* Project Image Placeholder */}
-                <div className="h-48 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
-                  <div className="text-center text-gray-400">
-                    <svg className="w-16 h-16 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <p className="text-sm">Project Screenshot</p>
-                  </div>
-                </div>
-
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                    <h3 className={`text-xl font-bold group-hover:text-blue-400 transition-colors ${
+                      isDark ? 'text-white' : 'text-gray-900'
+                    }`}>
                       {project.title}
                     </h3>
                     {project.featured && (
@@ -85,7 +90,9 @@ export const Projects = () => {
                     )}
                   </div>
 
-                  <p className="text-gray-300 mb-4 leading-relaxed">
+                  <p className={`mb-4 leading-relaxed transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
                     {project.description}
                   </p>
 
@@ -113,19 +120,6 @@ export const Projects = () => {
                         </svg>
                         <span>Code</span>
                       </a>
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-300 hover:scale-105"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                          <span>Live Demo</span>
-                        </a>
-                      )}
                     </div>
                   </div>
                 </div>
