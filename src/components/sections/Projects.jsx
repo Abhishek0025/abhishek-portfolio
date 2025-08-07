@@ -8,9 +8,9 @@ export const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Real-time Cloud Billing Dashboard",
-      description: "Cloud costs are often misunderstood and hard to track, especially for small teams. I built Cloud Cost Analyzer to learn how to integrate real AWS billing data with full-stack tools, build a scalable and intuitive frontend using React + Chart.js, practice secure AWS authentication with IAM and Cost Explorer API, and simulate the kind of product used at cloud cost optimization startups like Pump.co. Visualized AWS costs and usage in a clean, interactive dashboard, reducing cloud billing uncertainty by 80% using smart charts and real-time data.",
-      technologies: ["React.js", "Chart.js", "Python", "FastAPI", "AWS Cost Explorer API", "boto3", "IAM"],
+      title: "Cloud Cost Analyzer",
+      description: "Developed a full-stack performance dashboard using React, TypeScript, and FastAPI to visualize large-scale metrics. Designed modular backend APIs with optimized data flows, enabling real-time chart rendering and scalable frontend integrations via Axios and REST endpoints.",
+      technologies: ["React.js", "Chart.js", "TypeScript", "FastAPI", "REST API", "Axios"],
       githubUrl: "#",
       liveUrl: null,
       featured: true
