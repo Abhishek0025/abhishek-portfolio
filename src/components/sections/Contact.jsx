@@ -12,11 +12,39 @@ export const Contact = () => {
     email: "",
     message: "",
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+    }
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Please enter a valid email";
+    }
+    if (!formData.message.trim()) {
+      errors.message = "Message is required";
+    } else if (formData.message.trim().length < 10) {
+      errors.message = "Message must be at least 10 characters";
+    }
+    return errors;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errors = validateForm();
+    
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    setFormErrors({});
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -30,12 +58,64 @@ export const Contact = () => {
       
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitStatus(null), 5000);
     } catch (error) {
       setSubmitStatus("error");
+      setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const copyEmailToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('abhishek.arunkumar08@gmail.com');
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
+  };
+
+  // Resume download handler - commented out for now
+  // const handleResumeDownload = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     // In development, Vite serves from root. In production, use base path
+  //     const isDev = import.meta.env.DEV;
+  //     const baseUrl = isDev ? '/' : (import.meta.env.BASE_URL || '/');
+  //     const resumePath = `${baseUrl}resume.pdf`.replace(/\/\//g, '/');
+  //     
+  //     const response = await fetch(resumePath);
+  //     if (!response.ok) {
+  //       throw new Error(`Failed to fetch resume: ${response.status} ${response.statusText}`);
+  //     }
+  //     
+  //     const blob = await response.blob();
+  //     const url = window.URL.createObjectURL(blob);
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.download = 'Abhishek_Arunkumar_Resume.pdf';
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //     window.URL.revokeObjectURL(url);
+  //   } catch (error) {
+  //     console.error('Error downloading resume:', error);
+  //     // Fallback: try direct download link
+  //     const isDev = import.meta.env.DEV;
+  //     const baseUrl = isDev ? '/' : (import.meta.env.BASE_URL || '/');
+  //     const resumePath = `${baseUrl}resume.pdf`.replace(/\/\//g, '/');
+  //     
+  //     const link = document.createElement('a');
+  //     link.href = resumePath;
+  //     link.download = 'Abhishek_Arunkumar_Resume.pdf';
+  //     link.target = '_blank';
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   }
+  // };
 
   const socialLinks = [
     {
@@ -58,7 +138,7 @@ export const Contact = () => {
     },
     {
       name: "Email",
-      url: "mailto:abhishek.arunkumar@wisc.edu",
+      url: "mailto:abhishek.arunkumar08@gmail.com",
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -70,17 +150,21 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen flex items-center justify-center py-20"
+      className="min-h-screen flex items-center justify-center py-24"
     >
       <RevealOnScroll>
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-sky-500 via-cyan-400 to-cyan-300 bg-clip-text text-transparent text-center">
             Get In Touch
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div>
+            <div className={`p-6 rounded-xl border shadow-lg ${
+              isDark 
+                ? 'border-white/10 bg-gradient-to-br from-white/5 via-white/5 to-white/10 shadow-sky-900/20' 
+                : 'border-gray-200/80 bg-white shadow-sky-100/50'
+            }`}>
               <h3 className={`text-xl font-semibold mb-6 transition-colors duration-300 ${
                 isDark ? 'text-white' : 'text-gray-900'
               }`}>Send me a message</h3>
@@ -88,8 +172,8 @@ export const Contact = () => {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                      isDark ? 'text-gray-300' : 'text-gray-700'
+                    <label className={`block text-sm font-semibold mb-2.5 transition-colors duration-300 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
                     }`}>
                       Name
                     </label>
@@ -98,18 +182,28 @@ export const Contact = () => {
                       name="name"
                       required
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        if (formErrors.name) setFormErrors({ ...formErrors, name: '' });
+                      }}
+                      className={`w-full px-4 py-3.5 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 text-base shadow-sm ${
+                        formErrors.name
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'focus:ring-sky-500'
+                      } ${
                         isDark 
-                          ? 'bg-white/5 border-white/10 text-white placeholder-gray-400' 
-                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                          ? 'bg-white/10 border-white/20 text-gray-100 placeholder-gray-400 focus:bg-white/15 focus:border-sky-500' 
+                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-sky-500 focus:shadow-[0_0_0_3px_rgba(14,165,233,0.1)]'
                       }`}
                       placeholder="Your name"
                     />
+                    {formErrors.name && (
+                      <p className="text-red-400 text-xs mt-1">{formErrors.name}</p>
+                    )}
                   </div>
                   <div>
-                    <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                      isDark ? 'text-gray-300' : 'text-gray-700'
+                    <label className={`block text-sm font-semibold mb-2.5 transition-colors duration-300 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
                     }`}>
                       Email
                     </label>
@@ -118,14 +212,24 @@ export const Contact = () => {
                       name="email"
                       required
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value });
+                        if (formErrors.email) setFormErrors({ ...formErrors, email: '' });
+                      }}
+                      className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 ${
+                        formErrors.email
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'focus:ring-sky-500'
+                      } ${
                         isDark 
                           ? 'bg-white/5 border-white/10 text-white placeholder-gray-400' 
                           : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
                       }`}
                       placeholder="your.email@example.com"
                     />
+                    {formErrors.email && (
+                      <p className="text-red-400 text-xs mt-1">{formErrors.email}</p>
+                    )}
                   </div>
                 </div>
                 
@@ -140,33 +244,49 @@ export const Contact = () => {
                     required
                     rows="6"
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none ${
+                    onChange={(e) => {
+                      setFormData({ ...formData, message: e.target.value });
+                      if (formErrors.message) setFormErrors({ ...formErrors, message: '' });
+                    }}
+                    className={`w-full px-4 py-3.5 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 resize-none text-base shadow-sm ${
+                      formErrors.message
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'focus:ring-sky-500'
+                    } ${
                       isDark 
-                        ? 'bg-white/5 border-white/10 text-white placeholder-gray-400' 
-                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                        ? 'bg-white/10 border-white/20 text-gray-100 placeholder-gray-400 focus:bg-white/15 focus:border-sky-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-sky-500 focus:shadow-[0_0_0_3px_rgba(14,165,233,0.1)]'
                     }`}
                     placeholder="Tell me about your project or opportunity..."
                   ></textarea>
+                  {formErrors.message && (
+                    <p className="text-red-400 text-xs mt-1">{formErrors.message}</p>
+                  )}
                 </div>
 
                 {/* Status Messages */}
                 {submitStatus === "success" && (
-                  <div className="bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-lg">
-                    Message sent successfully! I'll get back to you soon.
+                  <div className="bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-lg animate-fade-in flex items-center space-x-2">
+                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Message sent successfully! I'll get back to you soon.</span>
                   </div>
                 )}
                 
                 {submitStatus === "error" && (
-                  <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-lg">
-                    Something went wrong. Please try again or reach out via email.
+                  <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-lg animate-fade-in flex items-center space-x-2">
+                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    <span>Something went wrong. Please try again or reach out via email.</span>
                   </div>
                 )}
                 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 px-8 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(59,130,246,0.4)] hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full bg-gradient-to-r from-sky-500 to-cyan-500 text-white py-4 px-8 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(14,165,233,0.4)] hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center space-x-2">
@@ -184,19 +304,41 @@ export const Contact = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-8">
+            <div className={`p-6 rounded-xl border space-y-8 shadow-lg ${
+              isDark 
+                ? 'border-white/10 bg-gradient-to-br from-white/5 via-white/5 to-white/10 shadow-sky-900/20' 
+                : 'border-gray-200/80 bg-white shadow-sky-100/50'
+            }`}>
               <div>
                 <h3 className={`text-xl font-semibold mb-6 transition-colors duration-300 ${
                   isDark ? 'text-white' : 'text-gray-900'
                 }`}>Get in touch</h3>
-                <p className={`leading-relaxed mb-8 transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
+                <p className={`text-base leading-relaxed mb-8 transition-colors duration-300 ${
+                  isDark ? 'text-gray-200' : 'text-gray-800'
                 }`}>
                   I'm always open to discussing new opportunities, interesting projects, 
                   or just having a chat about technology and development. Feel free to 
                   reach out through any of the channels below.
                 </p>
               </div>
+
+              {/* Resume Download - Commented out for now */}
+              {/* <div>
+                <button
+                  onClick={handleResumeDownload}
+                  className={`flex items-center justify-center space-x-2 w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
+                    isDark
+                      ? 'bg-gradient-to-r from-sky-500 to-cyan-500 text-white hover:shadow-[0_10px_30px_rgba(14,165,233,0.3)]'
+                      : 'bg-gradient-to-r from-sky-500 to-cyan-500 text-white hover:shadow-[0_10px_30px_rgba(14,165,233,0.4)]'
+                  }`}
+                  aria-label="Download Resume"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span>Download Resume</span>
+                </button>
+              </div> */}
 
               {/* Social Links */}
               <div>
@@ -211,42 +353,83 @@ export const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`flex items-center space-x-3 transition-colors duration-300 hover:scale-105 group ${
-                        isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'
+                        isDark ? 'text-gray-200 hover:text-sky-400' : 'text-gray-700 hover:text-sky-600'
                       }`}
                     >
-                      <div className={`p-2 rounded-lg group-hover:bg-blue-500/10 transition-colors duration-300 ${
+                      <div className={`p-2 rounded-lg group-hover:bg-sky-500/10 transition-colors duration-300 ${
                         isDark ? 'bg-white/5' : 'bg-gray-100'
                       }`}>
                         {link.icon}
                       </div>
-                      <span className="font-medium">{link.name}</span>
+                      <span className="font-semibold">{link.name}</span>
                     </a>
                   ))}
                 </div>
               </div>
 
               {/* Quick Info */}
-              <div className={`rounded-lg p-6 border transition-all duration-300 ${
-                isDark ? 'bg-white/5 border-white/10' : 'bg-gray-50/50 border-gray-200'
+              <div className={`rounded-lg p-6 border transition-all duration-300 shadow-md ${
+                isDark 
+                  ? 'bg-white/5 border-white/10 shadow-sky-900/10' 
+                  : 'bg-gray-50/80 border-gray-200/80 shadow-gray-200/50'
               }`}>
-                <h4 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
+                <h4 className={`text-lg font-semibold mb-5 transition-colors duration-300 ${
                   isDark ? 'text-white' : 'text-gray-900'
                 }`}>Quick Info</h4>
-                <div className={`space-y-3 transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
+                <div className={`space-y-4 transition-colors duration-300 ${
+                  isDark ? 'text-gray-200' : 'text-gray-800'
                 }`}>
                   <div className="flex items-center space-x-3">
-                    <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span>San Jose, California</span>
+                    <span className="text-base">San Jose, California</span>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Available for full-time opportunities</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <svg className="w-5 h-5 text-sky-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className="text-base">Available for full-time opportunities</span>
+                    </div>
+                  </div>
+                  <div className={`flex items-center justify-between mt-4 pt-4 border-t ${
+                    isDark ? 'border-white/10' : 'border-gray-200'
+                  }`}>
+                    <div className="flex items-center space-x-3 flex-1 min-w-0">
+                      <svg className="w-5 h-5 text-sky-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <span className="text-base truncate">abhishek.arunkumar08@gmail.com</span>
+                    </div>
+                    <button
+                      onClick={copyEmailToClipboard}
+                      className={`px-3 py-1.5 text-xs rounded-lg transition-all duration-300 hover:scale-105 ${
+                        emailCopied
+                          ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                          : isDark
+                          ? 'bg-sky-500/10 text-sky-400 border border-sky-500/20 hover:bg-sky-500/20'
+                          : 'bg-sky-500/10 text-sky-600 border border-sky-500/20 hover:bg-sky-500/20'
+                      }`}
+                      aria-label="Copy email address"
+                    >
+                      {emailCopied ? (
+                        <span className="flex items-center space-x-1">
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Copied!</span>
+                        </span>
+                      ) : (
+                        <span className="flex items-center space-x-1">
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                          <span>Copy</span>
+                        </span>
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>

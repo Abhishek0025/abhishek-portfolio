@@ -4,17 +4,74 @@ import { useTheme } from "../../App";
 
 export const Home = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [smoothPosition, setSmoothPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const { theme } = useTheme();
 
   useEffect(() => {
+    let animationFrameId;
+    let lastTime = 0;
+    let isActive = false;
+    const throttleDelay = 16; // ~60fps
+
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      const currentTime = Date.now();
+      if (currentTime - lastTime >= throttleDelay) {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+        lastTime = currentTime;
+        if (!isActive) {
+          isActive = true;
+          smoothFollow();
+        }
+      }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    // Smooth interpolation for cursor following - only when mouse is moving
+    const smoothFollow = () => {
+      setSmoothPosition(prev => {
+        const newX = prev.x + (mousePosition.x - prev.x) * 0.1;
+        const newY = prev.y + (mousePosition.y - prev.y) * 0.1;
+        const diff = Math.abs(newX - mousePosition.x) + Math.abs(newY - mousePosition.y);
+        
+        // Stop animation when close enough
+        if (diff < 0.5) {
+          isActive = false;
+          return { x: mousePosition.x, y: mousePosition.y };
+        }
+        
+        animationFrameId = requestAnimationFrame(smoothFollow);
+        return { x: newX, y: newY };
+      });
+    };
+
+    const handleMouseEnter = () => {
+      isActive = true;
+      smoothFollow();
+    };
+
+    const handleMouseLeave = () => {
+      isActive = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    const section = document.getElementById('home');
+    if (section) {
+      section.addEventListener('mouseenter', handleMouseEnter);
+      section.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (section) {
+        section.removeEventListener('mouseenter', handleMouseEnter);
+        section.removeEventListener('mouseleave', handleMouseLeave);
+      }
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [mousePosition]);
 
   const isDark = theme === 'dark';
 
@@ -25,38 +82,83 @@ export const Home = () => {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Enhanced Background with Theme Support */}
+      {/* Enhanced Background with Theme Support - Ocean Deep */}
       <div className={`absolute inset-0 ${
         isDark 
-          ? 'bg-gradient-to-br from-slate-900/40 via-black to-slate-800/40' 
-          : 'bg-gradient-to-br from-blue-50/60 via-white to-purple-50/60'
+          ? 'bg-gradient-to-br from-sky-900/40 via-black to-cyan-900/40' 
+          : 'bg-gradient-to-br from-sky-50/80 via-white to-cyan-50/50'
       }`}></div>
       
       {/* Matte Background Effect */}
       <div className={`absolute inset-0 ${
         isDark 
-          ? 'bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]' 
-          : 'bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]'
+          ? 'bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.1),transparent_50%)]' 
+          : 'bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.08),transparent_50%)]'
       }`}></div>
       
-      {/* Animated background elements */}
+      {/* Smooth cursor-following gradient layers - Optimized with CSS variables */}
       <div 
-        className="absolute inset-0 opacity-40"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(800px circle at ${smoothPosition.x}px ${smoothPosition.y}px, ${
+            isDark ? 'rgba(14, 165, 233, 0.25)' : 'rgba(14, 165, 233, 0.2)'
+          }, transparent 50%)`,
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
+        }}
+      ></div>
+
+      {/* Secondary trailing glow (Cyan) - Reduced layers for performance */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
         style={{
           background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, ${
-            isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(59, 130, 246, 0.1)'
-          }, transparent 40%)`,
-          transition: 'all 0.3s ease-out'
+            isDark ? 'rgba(6, 182, 212, 0.2)' : 'rgba(6, 182, 212, 0.18)'
+          }, transparent 45%)`,
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
+        }}
+      ></div>
+
+      {/* Tertiary outer glow (Light Cyan) */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(1000px circle at ${smoothPosition.x}px ${smoothPosition.y}px, ${
+            isDark ? 'rgba(34, 211, 238, 0.1)' : 'rgba(34, 211, 238, 0.12)'
+          }, transparent 60%)`,
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
         }}
       ></div>
       
-      {/* Floating particles effect */}
-      <div className="absolute inset-0">
+      {/* Floating particles effect - reduced on mobile */}
+      <div className="absolute inset-0 hidden md:block">
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
             className={`absolute w-1 h-1 rounded-full animate-pulse ${
-              isDark ? 'bg-blue-400/40' : 'bg-blue-500/30'
+              isDark ? 'bg-sky-400/40' : 'bg-sky-500/50'
+            }`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          ></div>
+        ))}
+      </div>
+      {/* Fewer particles on mobile */}
+      <div className="absolute inset-0 md:hidden">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full animate-pulse ${
+              isDark ? 'bg-sky-400/30' : 'bg-sky-500/20'
             }`}
             style={{
               left: `${Math.random() * 100}%`,
@@ -73,14 +175,14 @@ export const Home = () => {
           {/* Professional greeting with enhanced animations */}
           <div className="mb-6 transform transition-all duration-500 hover:scale-105">
             <p className={`text-lg font-medium mb-2 animate-fade-in ${
-              isDark ? 'text-blue-400' : 'text-blue-600'
+              isDark ? 'text-sky-400' : 'text-sky-600'
             }`}>Hey, I'm</p>
             <h1 
-              className={`text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 bg-clip-text text-transparent leading-tight hover:scale-105 transition-transform duration-300 ${
+              className={`text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-sky-500 via-cyan-400 to-cyan-300 bg-clip-text text-transparent leading-tight hover:scale-105 transition-transform duration-300 ${
                 isDark ? '' : 'drop-shadow-lg'
               }`}
               style={{
-                textShadow: isHovering ? `0 0 30px ${isDark ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.2)'}` : 'none',
+                textShadow: isHovering ? `0 0 30px ${isDark ? 'rgba(14, 165, 233, 0.3)' : 'rgba(14, 165, 233, 0.2)'}` : 'none',
                 transition: 'all 0.3s ease'
               }}
             >
@@ -88,7 +190,7 @@ export const Home = () => {
             </h1>
             <h2 
               className={`text-2xl md:text-3xl font-semibold mb-6 transition-colors duration-300 ${
-                isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'
+                isDark ? 'text-gray-300 hover:text-sky-400' : 'text-gray-700 hover:text-sky-600'
               }`}
               style={{
                 transform: isHovering ? 'translateY(-2px)' : 'translateY(0)',
@@ -112,22 +214,22 @@ export const Home = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
             <a
               href="#projects"
-              className="group bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 px-8 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(59,130,246,0.4)] hover:scale-105 relative overflow-hidden"
+              className="group bg-gradient-to-r from-sky-500 to-cyan-500 text-white py-4 px-8 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(14,165,233,0.4)] hover:scale-105 relative overflow-hidden"
               style={{
                 transform: isHovering ? 'scale(1.02)' : 'scale(1)',
                 transition: 'all 0.3s ease'
               }}
             >
               <span className="relative z-10">View My Work</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-sky-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             <a
               href="#contact"
               className={`group border-2 py-4 px-8 rounded-lg font-semibold transition-all duration-300 
              hover:-translate-y-2 hover:scale-105 relative overflow-hidden ${
                isDark 
-                 ? 'border-blue-500/50 text-blue-400 hover:shadow-[0_20px_40px_rgba(59,130,246,0.2)] hover:bg-blue-500/10 hover:border-blue-400' 
-                 : 'border-blue-600/50 text-blue-600 hover:shadow-[0_20px_40px_rgba(59,130,246,0.2)] hover:bg-blue-500/10 hover:border-blue-600'
+                 ? 'border-sky-500/50 text-sky-400 hover:shadow-[0_20px_40px_rgba(14,165,233,0.2)] hover:bg-sky-500/10 hover:border-sky-400' 
+                 : 'border-sky-600/50 text-sky-600 hover:shadow-[0_20px_40px_rgba(14,165,233,0.2)] hover:bg-sky-500/10 hover:border-sky-600'
              }`}
               style={{
                 transform: isHovering ? 'scale(1.02)' : 'scale(1)',
@@ -136,7 +238,7 @@ export const Home = () => {
             >
               <span className="relative z-10">Let's Connect</span>
               <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                isDark ? 'bg-blue-500/5' : 'bg-blue-500/10'
+                isDark ? 'bg-sky-500/5' : 'bg-sky-500/10'
               }`}></div>
             </a>
           </div>
@@ -161,7 +263,7 @@ export const Home = () => {
                 )
               },
               {
-                href: "mailto:abhishek.arunkumar@wisc.edu",
+                href: "mailto:abhishek.arunkumar08@gmail.com",
                 icon: (
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -174,19 +276,25 @@ export const Home = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`transition-all duration-300 hover:scale-125 hover:rotate-12 p-2 rounded-full group ${
+                className={`relative transition-all duration-300 hover:scale-125 hover:rotate-12 p-2 rounded-full group ${
                   isDark 
-                    ? 'text-gray-400 hover:text-blue-400 hover:bg-blue-500/10' 
-                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-500/10'
+                    ? 'text-gray-400 hover:text-sky-400 hover:bg-sky-500/10' 
+                    : 'text-gray-600 hover:text-sky-600 hover:bg-sky-500/10'
                 }`}
                 style={{
                   transform: isHovering ? 'scale(1.1)' : 'scale(1)',
                   transition: 'all 0.3s ease'
                 }}
+                aria-label={social.href.includes('github') ? 'GitHub profile' : social.href.includes('linkedin') ? 'LinkedIn profile' : 'Email'}
               >
                 <div className="group-hover:animate-pulse">
                   {social.icon}
                 </div>
+                <span className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${
+                  isDark ? 'bg-gray-800 text-white' : 'bg-gray-900 text-white'
+                }`}>
+                  {social.href.includes('github') ? 'GitHub' : social.href.includes('linkedin') ? 'LinkedIn' : 'Email'}
+                </span>
               </a>
             ))}
           </div>

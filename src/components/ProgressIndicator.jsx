@@ -4,23 +4,31 @@ export const ProgressIndicator = () => {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+    let ticking = false;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = ['home', 'about', 'projects', 'contact'];
+          const scrollPosition = window.scrollY + 100;
+
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const { offsetTop, offsetHeight } = element;
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -47,7 +55,7 @@ export const ProgressIndicator = () => {
             onClick={() => scrollToSection(section.id)}
             className={`group relative flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 ${
               activeSection === section.id
-                ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/50'
+                ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/50'
                 : 'bg-white/10 text-gray-400 hover:bg-white/20 hover:text-white'
             }`}
           >
