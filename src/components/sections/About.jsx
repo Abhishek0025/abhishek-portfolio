@@ -7,6 +7,7 @@ export const About = () => {
 
   const skills = {
     frontend: ["HTML5", "CSS3", "JavaScript (ES6+)", "TypeScript", "React.js", "Next.js", "Redux"],
+    mobile: ["Swift", "UIKit", "MVVM Architecture", "Combine", "Core Data", "XCTest", "XCUITest", "Xcode"],
     uiux: ["Responsive Design", "Component Libraries", "Design Systems", "Cross-Browser Compatibility"],
     backend: ["Node.js", "Express.js", "REST APIs", "GraphQL", "Java", "Python"],
     devops: ["Docker", "CI/CD Pipelines", "Postman", "Git", "GitHub", "Confluence", "JIRA"],
@@ -32,8 +33,7 @@ export const About = () => {
             <p className={`mb-6 text-lg leading-relaxed transition-colors duration-300 ${
               isDark ? 'text-gray-200' : 'text-gray-800'
             }`}>
-              Passionate developer with expertise in building scalable web
-              applications and creating innovative solutions.
+              Passionate developer crafting efficient, scalable web and mobile applications that deliver exceptional user experiences. With expertise in frontend, backend, and cross-platform mobile development (React Native, iOS), I build solutions that drive measurable business impact and user satisfaction.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -47,6 +47,30 @@ export const About = () => {
                 }`}>Frontend Technologies</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.frontend.map((tech, key) => (
+                    <span
+                      key={key}
+                      className={`py-1 px-3 rounded-full text-xs transition ${
+                        isDark
+                          ? 'bg-sky-500/10 text-sky-500 hover:bg-sky-500/20 hover:shadow-[0_2px_8px_rgba(14,165,233,0.2)]'
+                          : 'bg-sky-100 text-sky-600 border border-sky-200/60 hover:bg-sky-200 hover:shadow-[0_2px_8px_rgba(14,165,233,0.3)]'
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className={`rounded-xl p-5 hover:-translate-y-1 transition-all shadow-md ${
+                isDark 
+                  ? 'bg-white/5 border border-white/5 shadow-sky-900/10' 
+                  : 'bg-white/90 border border-gray-200/60 shadow-gray-200/50'
+              }`}>
+                <h3 className={`text-lg font-bold mb-4 transition-colors duration-300 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>Mobile Development</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.mobile.map((tech, key) => (
                     <span
                       key={key}
                       className={`py-1 px-3 rounded-full text-xs transition ${
@@ -342,7 +366,67 @@ export const About = () => {
                   </ul>
                 </div>
 
-                {/* PwC */}
+                {/* PwC - iOS Project */}
+                <div className={`pb-6 border-b ${
+                  isDark ? 'border-white/10' : 'border-gray-200'
+                } last:border-0 last:pb-0`}>
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className={`font-bold text-lg transition-colors duration-300 ${
+                      isDark ? 'text-white' : 'text-gray-900'
+                    }`}>
+                      iOS Software Engineer | PricewaterhouseCoopers
+                    </h4>
+                  </div>
+                  <p className={`mb-2 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
+                    Sep 2021 – Sep 2022 | Bengaluru, India
+                  </p>
+                  <p className={`mb-3 text-sm italic ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Project: Healthcare iOS Application
+                  </p>
+                  <p className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Worked on HIPAA-compliant healthcare iOS applications for a U.S. client, serving 70K authenticated users, focusing on Swift/UIKit development, MVVM architecture, and production stability.
+                  </p>
+                  <ul className="space-y-2.5 ml-4">
+                    <li className={`flex items-start ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      <span className="mr-2 text-sky-400 mt-1">▸</span>
+                      <span className="leading-relaxed">Built HIPAA-compliant, production, customer-facing iOS healthcare applications for a U.S. client, delivering secure login and nationwide appointment discovery modules across multiple production screens supporting 70K authenticated users</span>
+                    </li>
+                    <li className={`flex items-start ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      <span className="mr-2 text-sky-400 mt-1">▸</span>
+                      <span className="leading-relaxed">Delivered production iOS features across 8 sprint cycles, improving feature delivery reliability by 15% using Swift and UIKit</span>
+                    </li>
+                    <li className={`flex items-start ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      <span className="mr-2 text-sky-400 mt-1">▸</span>
+                      <span className="leading-relaxed">Cut onboarding time by 25% and improved code reuse by engineering modular MVVM components and reusable ViewModels</span>
+                    </li>
+                    <li className={`flex items-start ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      <span className="mr-2 text-sky-400 mt-1">▸</span>
+                      <span className="leading-relaxed">Mitigated authentication failures by 10% and API error rates by 18% by integrating secure login workflows with RESTful APIs, JSON services, and Core Data persistence in collaboration with backend teams</span>
+                    </li>
+                    <li className={`flex items-start ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      <span className="mr-2 text-sky-400 mt-1">▸</span>
+                      <span className="leading-relaxed">Achieved 98% crash-free sessions by optimizing performance and memory using Combine, async/await and Xcode Instruments</span>
+                    </li>
+                    <li className={`flex items-start ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      <span className="mr-2 text-sky-400 mt-1">▸</span>
+                      <span className="leading-relaxed">Reduced production defects by 15% by expanding unit and UI test coverage (XCTest, XCUITest), participating in code reviews, maintaining Git-based workflows, and supporting production releases including selective Objective-C to Swift migrations</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* PwC - React/Java Project */}
                 <div>
                   <div className="flex items-start justify-between mb-3">
                     <h4 className={`font-bold text-lg transition-colors duration-300 ${
@@ -351,8 +435,11 @@ export const About = () => {
                       Software Engineer | PricewaterhouseCoopers
                     </h4>
                   </div>
-                  <p className={`mb-4 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
-                    Sep 2021 – Jun 2023 | Bengaluru, India
+                  <p className={`mb-2 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
+                    Jun 2022 – Jun 2023 | Bengaluru, India
+                  </p>
+                  <p className={`mb-3 text-sm italic ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Project: Enterprise Audit & Compliance Platform
                   </p>
                   <p className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                     Worked on enterprise-scale audit and compliance workflows used by eight teams across multiple modules, focusing on React frontend development, performance optimization, and DevOps practices.
