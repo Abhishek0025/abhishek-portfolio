@@ -30,12 +30,6 @@ export const About = () => {
               ? 'border-white/10 bg-gradient-to-br from-white/5 via-white/5 to-white/10 shadow-sky-900/20' 
               : 'border-gray-200/80 bg-white shadow-sky-100/50'
           }`}>
-            <p className={`mb-6 text-lg leading-relaxed transition-colors duration-300 ${
-              isDark ? 'text-gray-200' : 'text-gray-800'
-            }`}>
-              Passionate developer crafting efficient, scalable web and mobile applications that deliver exceptional user experiences. With expertise in frontend, backend, and cross-platform mobile development (React Native, iOS), I build solutions that drive measurable business impact and user satisfaction.
-            </p>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className={`rounded-xl p-5 hover:-translate-y-1 transition-all shadow-md ${
                 isDark 

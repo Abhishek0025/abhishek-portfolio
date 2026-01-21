@@ -205,8 +205,8 @@ export const Home = () => {
           <p className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${
             isDark ? 'text-gray-300 hover:text-gray-200' : 'text-gray-600 hover:text-gray-800'
           }`}>
-            I craft efficient, scalable web applications that deliver exceptional user experiences. 
-            With expertise in both frontend and backend development, I build solutions that drive 
+            I craft efficient, scalable web and mobile applications that deliver exceptional user experiences. 
+            With expertise in both frontend and backend development, plus iOS and cross-platform app development, I build solutions that drive 
             measurable business impact and user satisfaction.
           </p>
 
