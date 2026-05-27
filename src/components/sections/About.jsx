@@ -233,44 +233,29 @@ export const About = () => {
                     <h4 className={`font-bold text-lg transition-colors duration-300 ${
                       isDark ? 'text-white' : 'text-gray-900'
                     }`}>
-                      Software Engineer Intern | Connyct Inc.
+                      Software Developer Intern | Connyct Inc.
                     </h4>
                   </div>
                   <p className={`mb-4 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
-                    Aug 2025 – Dec 2025 | New York, NY
-                  </p>
-                  <p className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Worked on production dashboards used by 13,700+ users across five teams, focusing on React TypeScript component architecture, performance optimization, and cross-team collaboration.
+                    August 2025 – January 2026 | New York, NY, USA
                   </p>
                   <ul className="space-y-2.5 ml-4">
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
+                    <li className={`flex items-start ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Built shared React TypeScript components adopted by five teams, reducing UI duplication by 8% across production dashboards</span>
+                      <span className="leading-relaxed">Improved customer-facing feed performance, reducing page load time from 4.2s to 3.1s for over 4,000 weekly active users through HTTP response caching and lazy-loaded media delivery.</span>
                     </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
+                    <li className={`flex items-start ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Redesigned data-driven dashboard filters with React and Chart.js, raising user engagement from 15% to 35% for 13,700 users</span>
+                      <span className="leading-relaxed">Troubleshot client-side rendering delays across six React feed components, lowering interaction latency 18% by profiling redundant re-renders with Chrome DevTools and validating fixes during release testing.</span>
                     </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
+                    <li className={`flex items-start ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Optimized GraphQL queries and React rendering with Profiler, reducing production dashboard load time from 2.1s to 1.8s</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Reviewed code against SDLC standards, improving consistency and surfacing risks earlier to raise overall software quality</span>
+                      <span className="leading-relaxed">Walked product managers and design partners through workflow issues and API findings, tailoring presentations for technical and non-technical audiences to align everyone before each weekly release.</span>
                     </li>
                   </ul>
                 </div>
 
-                {/* University of Wisconsin-Madison */}
+                {/* University of Wisconsin - CDIS */}
                 <div className={`pb-6 border-b ${
                   isDark ? 'border-white/10' : 'border-gray-200'
                 } last:border-0 last:pb-0`}>
@@ -278,149 +263,33 @@ export const About = () => {
                     <h4 className={`font-bold text-lg transition-colors duration-300 ${
                       isDark ? 'text-white' : 'text-gray-900'
                     }`}>
-                      Software Engineer | University of Wisconsin-Madison iSchool
+                      Software Engineer - Solutions-Focused | University of Wisconsin - CDIS
                     </h4>
                   </div>
                   <p className={`mb-4 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
-                    Jun 2024 – May 2025 | Madison, WI
-                  </p>
-                  <p className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Worked on a full-stack job portal serving 500+ students, focusing on end-to-end development, React-based responsive UIs, and AWS deployment optimization.
+                    January 2024 – May 2025 | Madison, WI, USA
                   </p>
                   <ul className="space-y-2.5 ml-4">
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
+                    <li className={`flex items-start ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Owned end-to-end development of a full-stack job portal serving 500+ students, from feature design through deployment</span>
+                      <span className="leading-relaxed">Acted as trusted technical advisor to faculty, gathering customer requirements and improving allocation efficiency 35% by designing Python matching workflows across Linux-based IT infrastructure and backend services.</span>
                     </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
+                    <li className={`flex items-start ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Built React-based responsive UIs integrated with Node.js and REST APIs, ensuring usability across devices and screen sizes</span>
+                      <span className="leading-relaxed">Designed and integrated 11 REST API endpoints between Node.js and MySQL, building a proof-of-concept that enabled reliable system-to-system communication and reduced repeated clarification from technical stakeholders.</span>
                     </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
+                    <li className={`flex items-start ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Enabled library placement workflows by building API-driven services with RBAC for admin, student, and partner library users</span>
+                      <span className="leading-relaxed">Investigated backend allocation failures by reproducing workflow mismatches and validating API responses, then pushed verified builds through CI/CD pipelines that deployed to AWS each release cycle.</span>
                     </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
+                    <li className={`flex items-start ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Enhanced placement visibility by building admin dashboards with seven charts tracking offers and acceptances</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Deployed frontend assets using AWS S3 and CloudFront, improving Lighthouse mobile performance score from 68 to 91</span>
+                      <span className="leading-relaxed">Led product demonstrations and solution-design walkthroughs for program managers and faculty, translating technical tradeoffs into recommendations that helped non-technical decision-makers approve deployments and qualify priorities confidently.</span>
                     </li>
                   </ul>
                 </div>
 
-                {/* RecWell */}
-                <div className={`pb-6 border-b ${
-                  isDark ? 'border-white/10' : 'border-gray-200'
-                } last:border-0 last:pb-0`}>
-                  <div className="flex items-start justify-between mb-3">
-                    <h4 className={`font-bold text-lg transition-colors duration-300 ${
-                      isDark ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      Software Engineer Intern | RecWell
-                    </h4>
-                  </div>
-                  <p className={`mb-4 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
-                    Apr 2024 – Jun 2024 | Madison, WI
-                  </p>
-                  <p className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Worked on a campus recreation dashboard serving 23,550 users, focusing on performance optimization, component library design, and production stability.
-                  </p>
-                  <ul className="space-y-2.5 ml-4">
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Developed a responsive dashboard for campus recreation serving 23,550 users, reducing load time from 450ms to 150ms</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Designed a frontend component library integrated with Node.js APIs, enabling consistent theming across 11 React pages</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Identified and resolved production UI bugs using Chrome DevTools, improving stability during high-traffic usage</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* PwC - iOS Project */}
-                <div className={`pb-6 border-b ${
-                  isDark ? 'border-white/10' : 'border-gray-200'
-                } last:border-0 last:pb-0`}>
-                  <div className="flex items-start justify-between mb-3">
-                    <h4 className={`font-bold text-lg transition-colors duration-300 ${
-                      isDark ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      iOS Software Engineer | PricewaterhouseCoopers
-                    </h4>
-                  </div>
-                  <p className={`mb-2 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
-                    Sep 2021 – Sep 2022 | Bengaluru, India
-                  </p>
-                  <p className={`mb-3 text-sm italic ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Project: Healthcare iOS Application
-                  </p>
-                  <p className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Worked on HIPAA-compliant healthcare iOS applications for a U.S. client, serving 70K authenticated users, focusing on Swift/UIKit development, MVVM architecture, and production stability.
-                  </p>
-                  <ul className="space-y-2.5 ml-4">
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Built HIPAA-compliant, production, customer-facing iOS healthcare applications for a U.S. client, delivering secure login and nationwide appointment discovery modules across multiple production screens supporting 70K authenticated users</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Delivered production iOS features across 8 sprint cycles, improving feature delivery reliability by 15% using Swift and UIKit</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Cut onboarding time by 25% and improved code reuse by engineering modular MVVM components and reusable ViewModels</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Mitigated authentication failures by 10% and API error rates by 18% by integrating secure login workflows with RESTful APIs, JSON services, and Core Data persistence in collaboration with backend teams</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Achieved 98% crash-free sessions by optimizing performance and memory using Combine, async/await and Xcode Instruments</span>
-                    </li>
-                    <li className={`flex items-start ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
-                    }`}>
-                      <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Reduced production defects by 15% by expanding unit and UI test coverage (XCTest, XCUITest), participating in code reviews, maintaining Git-based workflows, and supporting production releases including selective Objective-C to Swift migrations</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* PwC - React/Java Project */}
+                {/* PricewaterhouseCoopers */}
                 <div>
                   <div className="flex items-start justify-between mb-3">
                     <h4 className={`font-bold text-lg transition-colors duration-300 ${
@@ -429,39 +298,33 @@ export const About = () => {
                       Software Engineer | PricewaterhouseCoopers
                     </h4>
                   </div>
-                  <p className={`mb-2 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
-                    Jun 2022 – Jun 2023 | Bengaluru, India
-                  </p>
-                  <p className={`mb-3 text-sm italic ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Project: Enterprise Audit & Compliance Platform
-                  </p>
-                  <p className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Worked on enterprise-scale audit and compliance workflows used by eight teams across multiple modules, focusing on React frontend development, performance optimization, and DevOps practices.
+                  <p className={`mb-4 ${isDark ? 'text-sky-400' : 'text-sky-600'}`}>
+                    September 2021 – June 2023 | Bengaluru, KA, India
                   </p>
                   <ul className="space-y-2.5 ml-4">
                     <li className={`flex items-start ${
                       isDark ? 'text-gray-200' : 'text-gray-800'
                     }`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Delivered enterprise-scale, cross-platform React user interfaces integrated with Java services and SQL data models, powering audit and compliance workflows across eight teams</span>
+                      <span className="leading-relaxed">Served as the subject-matter expert on an 80K-user HIPAA-compliant healthcare platform, reducing monthly UI-defect reports from 54 to 35 by rebuilding the onboarding and scheduling workflows.</span>
                     </li>
                     <li className={`flex items-start ${
                       isDark ? 'text-gray-200' : 'text-gray-800'
                     }`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Collaborated with product and QA teams to refine requirements and reduce workflow friction across six enterprise modules</span>
+                      <span className="leading-relaxed">Resolved 47 WCAG 2.1 AA accessibility issues across eight patient-facing workflows by auditing Lighthouse findings and validating keyboard navigation, screen-reader compatibility, and color-contrast requirements before audit.</span>
                     </li>
                     <li className={`flex items-start ${
                       isDark ? 'text-gray-200' : 'text-gray-800'
                     }`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Improved frontend performance for enterprise audit dashboards by optimizing React rendering and data fetching, reducing load time from 2.8s to 2.0s</span>
+                      <span className="leading-relaxed">Coordinated cross-functional release verification with QA and product stakeholders, reproducing reported failures and validating fixes through CI/CD pipelines, lowering monthly release incidents from 30 to 3.</span>
                     </li>
                     <li className={`flex items-start ${
                       isDark ? 'text-gray-200' : 'text-gray-800'
                     }`}>
                       <span className="mr-2 text-sky-400 mt-1">▸</span>
-                      <span className="leading-relaxed">Containerized services using Docker and supported CI/CD pipelines, contributing to a 98% release success rate</span>
+                      <span className="leading-relaxed">Presented release-readiness assessments and defect findings to senior managers and product owners, documenting troubleshooting outcomes and technical-solution tradeoffs so technical and business stakeholders could prioritize work.</span>
                     </li>
                   </ul>
                 </div>
